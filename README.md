@@ -1,74 +1,104 @@
-# Portfólio de Enzo Nukui
+# Enzo Nukui — Portfólio
 
-Portfólio pessoal em português brasileiro. A implementação segue o [briefing aprovado](../docs/briefing-original.md) e a [estrutura documentada](../docs/estrutura-do-projeto.md).
+Portfólio pessoal de **Enzo Nukui**, estudante de Análise e Desenvolvimento de Sistemas na FIAP. Uma experiência visual e interativa para apresentar sua trajetória, tecnologias, projetos, eventos e próximos passos em desenvolvimento de software.
 
-## Estado atual
+**Repositório:** [EnzoNukui/portfolio](https://github.com/EnzoNukui/portfolio)  
+**Domínio:** [enzonukui.com.br](https://enzonukui.com.br) — registrado; publicação na Vercel pendente.
 
-Etapa 1: fundação visual implementada. Inclui Instrument Sans e Syne locais, tokens CSS, temas escuro/claro, header flutuante com seção ativa, CV em cápsula independente, menu mobile acessível e cursor contextual para mouse.
+## Sobre o projeto
 
-A página atual tem conteúdo provisório identificado como portfólio em construção e sete destinos reais para testar a navegação. As seções finais, fotografias, preloader, notebook 3D, Connected Stack, galeria de projetos e motion cinematográfico serão implementados nas próximas etapas. O conteúdo provisório está isolado em `src/data/foundation.ts` e será removido conforme as seções forem concluídas.
+O site foi pensado como uma narrativa contínua, com dois temas visuais, animações guiadas pela rolagem e layouts adaptados para celular, tablet e desktop. As interações mantêm alternativas por toque e teclado e respeitam a preferência do sistema por movimento reduzido.
 
-## Executar
+### Seções
 
-Ambiente utilizado: Node.js 24.15 e npm 11.12. Execute os comandos nesta pasta (`enzo_nukui`).
+- **Início:** apresentação pessoal com tipografia em movimento e localização.
+- **Sobre:** capítulos da trajetória escolar, experiências e formação.
+- **Tecnologias:** ferramentas agrupadas por front-end, back-end e banco de dados, relacionadas a projetos.
+- **Projetos:** PayLeech, Sudoku, HTTPmon, Soulie e LocalLead, com capturas de tela, detalhes e links.
+- **Além do Código:** registros fotográficos de trabalhos e eventos, incluindo Google Hackathon, Talent Summit e FIAP Next.
+- **Música:** playlist incorporada pelo player oficial do Spotify.
+- **Futuro:** interesses, objetivos e próximos passos profissionais.
+- **Contato:** canais para conversar e acompanhar o trabalho.
 
-```sh
+## Tecnologias
+
+- React e TypeScript
+- Vite
+- CSS Modules e CSS custom properties para estilos, temas e responsividade
+- GSAP e ScrollTrigger para animações ligadas à rolagem
+- Motion para interações de interface
+- React Icons
+- Instrument Sans e Syne servidas pelo projeto; La Belle Aurore usada como fonte de destaque
+- Spotify Embed oficial para a playlist
+
+## Executar localmente
+
+Requisitos: Node.js e npm.
+
+```bash
+git clone https://github.com/EnzoNukui/portfolio.git
+cd portfolio
 npm ci
 npm run dev
 ```
 
-Use a URL impressa pelo Vite no terminal. Para gerar e conferir a versão de produção:
+Abra o endereço local informado pelo Vite no terminal.
 
-```sh
-npm run build
-npm run preview
-```
+## Comandos disponíveis
 
-## Verificar
+| Comando | Ação |
+| --- | --- |
+| `npm run dev` | Inicia o servidor de desenvolvimento |
+| `npm run build` | Verifica os tipos e gera a versão de produção em `dist/` |
+| `npm run preview` | Serve localmente a versão de produção |
+| `npm run lint` | Executa o ESLint |
+| `npm run typecheck` | Verifica os tipos TypeScript |
+| `npm run test:e2e` | Executa os testes de navegador com Playwright |
 
-```sh
-npm run lint
-npm run typecheck
+Para preparar o navegador usado pelos testes E2E, execute uma vez:
+
+```bash
 npx playwright install chromium
-npm run test:e2e
 ```
 
-O Playwright inicia um servidor Vite local automaticamente; fora de CI, também pode reutilizar o servidor existente na porta 5173. Os testes verificam tema, persistência, armazenamento bloqueado, navegação, download real, responsividade, menu, teclado, movimento reduzido, touch e carregamento das fontes. Traces de falhas ficam em `test-results/`, ignorado pelo Git.
+## Publicação na Vercel
 
-## Organização
+O projeto está preparado para ser importado da raiz do repositório:
 
-- `App.tsx`: composição global; `pages/Home`: ordem narrativa da página.
-- `components`: Header, ThemeToggle, CVButton e CustomCursor, cada um com CSS Module.
-- `providers`: contexto do tema e persistência. Tema escuro padrão; armazenamento na chave `enzo-nukui:theme:v1`.
-- `hooks`: assinatura de media queries, movimento reduzido, mouse e seção ativa.
-- `data`: navegação, identidade, contatos e conteúdo provisório.
-- `styles`: tokens, temas, tipografia e regras globais.
-- `assets`: imagens pessoais, eventos e cinco projetos selecionados.
-- `public/cv/enzo-nukui-cv.pdf`: currículo real para download direto.
-- `tests`: testes de navegador; `docs` no diretório superior: decisões e progresso.
+| Configuração | Valor |
+| --- | --- |
+| Framework Preset | Vite |
+| Root Directory | `/` |
+| Install Command | `npm ci` |
+| Build Command | `npm run build` |
+| Output Directory | `dist` |
 
-As pastas de seções e seus subcomponentes serão adicionados conforme forem implementados, evitando arquivos vazios. Header e seção ativa usam Motion. O movimento do cursor usa motion values e springs; sua posição não passa pelo estado React. CSS cuida de respostas simples. GSAP e WebGL serão adicionados quando as etapas que precisam deles começarem.
+Depois do primeiro deploy, adicione `enzonukui.com.br` em **Project Settings → Domains**. Configure no Registro.br os registros DNS exatos informados pela Vercel e aguarde a validação do domínio e do certificado HTTPS. A branch de produção conectada ao GitHub será publicada automaticamente a cada atualização.
 
-## Tema e acessibilidade
+O projeto não precisa de variáveis de ambiente para o build atual. O currículo fica em `public/cv/enzo-nukui-cv.pdf`; o player de música usa a playlist definida em `src/data/music.ts`.
 
-O script no `index.html` aplica a preferência antes da primeira pintura. A chave deve permanecer sincronizada com `providers/themeContext.ts`. Valores inválidos e armazenamento indisponível usam o tema escuro; a alternância continua funcionando na sessão. Abas abertas sincronizam alterações via evento `storage`.
+## Organização do código
 
-O menu usa `<dialog>` modal com conteúdo externo inerte, ciclo de Tab/Shift+Tab, Escape, retorno de foco e restauração da rolagem. Selecionar um link transfere foco à seção correspondente. As âncoras compensam o header fixo. Há um link para pular ao conteúdo e foco visível.
+```text
+public/                 Arquivos servidos diretamente, como currículo e favicon
+src/assets/             Retrato, imagens pessoais, eventos e capturas dos projetos
+src/components/         Menu, controle de tema, currículo e cursor contextual
+src/data/               Conteúdo da navegação, tecnologias, projetos e playlist
+src/hooks/              Hooks de seção ativa, mídia, cursor e movimento reduzido
+src/pages/Home/         Composição e ordem das seções da página
+src/providers/          Estado e persistência do tema
+src/sections/           Início, Sobre, Tecnologias, Projetos, eventos, música, futuro e contato
+src/styles/             Estilos globais, tipografia, temas e variáveis
+tests/                  Testes de integração no navegador
+```
 
-O cursor exige mouse com hover preciso, respeita movimento reduzido e cores forçadas, desaparece ao usar Tab e devolve o cursor nativo em textos, formulários, seleção e diálogo mobile. `data-cursor-label` comunica ações reais, como baixar o CV e enviar e-mail; `data-cursor-native` preserva controles que precisem do cursor padrão.
+## Acessibilidade e movimento
 
-## Conteúdo e recursos
+- Navegação por teclado e links para saltar ao conteúdo.
+- Menu móvel com suporte a foco, Escape e toque.
+- Estados de foco visíveis, nomes acessíveis e descrições para imagens.
+- Alternância de tema persistida entre visitas.
+- Animações reduzidas quando `prefers-reduced-motion` está ativo.
+- Player do Spotify com controles nativos e link para abrir a playlist diretamente.
 
-Contatos ficam em `data/socialLinks.ts`; identidade e URL do CV em `data/personal.ts`; âncoras em `data/navigation.ts`. As 31 imagens tiveram apenas os nomes padronizados; seus formatos e conteúdos foram preservados. O mapeamento está em `../docs/renomeacao-imagens.json`.
-
-Somente PayLeech, Sudoku, HTTPmon, Soulie e LocalLead estão previstos no escopo atual. Não há links de demonstração ou descrições técnicas definitivas até a verificação dos projetos.
-
-As fontes são servidas pelo próprio build via pacotes Fontsource, com licenças OFL-1.1 incluídas nos pacotes. Os ícones de interface são do conjunto Feather via React Icons. Não foi criado logotipo ou favicon provisório.
-
-TypeScript 6.0 foi escolhido para manter compatibilidade declarada com `typescript-eslint`; o scaffold inicial usava TypeScript 7. Oxlint foi substituído por ESLint. Não foram usadas opções para ignorar incompatibilidades de dependências.
-
-Não há publicação automática. Deploy exige autorização de Enzo.
-
-## Próxima etapa
-
-Home fotográfica com silhueta, nome em camadas, abertura integrada e parallax discreto. Ainda precisam de definição os relatos dos eventos, o trecho real para a tela do notebook e a avaliação visual das mídias. Ver [mapa de implementação](../docs/mapa-de-implementacao.md).
+As fotografias e capturas retratam a trajetória e os projetos apresentados no portfólio. As fontes de terceiros incluem suas licenças em `public/licenses/`.
