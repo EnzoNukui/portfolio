@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfólio de Enzo Nukui, estudante de Análise e Desenvolvimento de Sistemas na FIAP. Projetos, aprendizado e desenvolvimento de software." />
+    <meta property="og:title" content="Enzo Nukui — Desenvolvimento de software" />
+    <meta property="og:description" content="Projetos, aprendizado e trajetória de Enzo Nukui em desenvolvimento de software." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=La+Belle+Aurore&display=swap" rel="stylesheet" />
+    <title>Enzo Nukui — Desenvolvimento de software</title>
+    <script>
+      // Manter a chave sincronizada com providers/themeContext.ts.
+      try {
+        const saved = localStorage.getItem('enzo-nukui:theme:v1')
+        document.documentElement.dataset.theme = saved === 'light' ? 'light' : 'dark'
+      } catch {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>Ative o JavaScript para explorar este portfólio. Entre em contato pelo e-mail enzonukui2007@gmail.com ou <a href="/cv/enzo-nukui-cv.pdf" download>baixe o CV</a>.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

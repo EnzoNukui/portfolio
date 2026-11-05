@@ -1,0 +1,5 @@
+.toggle { display: grid; place-items: center; flex: 0 0 42px; width: 42px; height: 42px; padding: 0; border: 1px solid var(--color-border); border-radius: 50%; background: transparent; color: var(--color-text-primary); transition: background-color 180ms, border-color 180ms, transform 180ms; }
+.toggle:hover { background: var(--color-active); border-color: var(--color-text-secondary); }
+.toggle:active { transform: scale(.94); }
+.iconStage { display: grid; width: 20px; height: 20px; place-items: center; overflow: hidden; transform-origin: center; }
+.iconStage svg { width: 18px; height: 18px; }

@@ -1,0 +1,28 @@
+:root {
+  --font-body: 'Instrument Sans Variable', Arial, sans-serif;
+  --font-display: 'Syne Variable', Arial, sans-serif;
+  --page-gutter: clamp(20px, 5vw, 96px);
+  --page-max-width: 1728px;
+  --radius-pill: 999px;
+  --color-background: #0B0B0D;
+  --color-surface: #121317;
+  --color-text-primary: #F3F3F1;
+  --color-text-secondary: #B7BCC4;
+  --color-accent: #2E4E73;
+  --color-accent-hover: #3E628D;
+  --color-border: #23262D;
+  --color-header: rgb(18 18 19 / 96%);
+  --color-header-border: #3a3a3c;
+  --color-header-muted: #bfc0bd;
+  --color-header-active: #29292b;
+  --color-header-menu-border: #363638;
+  --color-active: #272a31;
+  --color-cv-background: #F3F3F1;
+  --color-cv-text: #0B0B0D;
+  --color-focus: #98bbeb;
+  --color-backdrop: rgb(0 0 0 / 65%);
+  --color-cursor: rgb(243 243 241 / 15%);
+  --color-cursor-border: #F3F3F1;
+  --color-cursor-label: #F3F3F1;
+  --color-cursor-text: #0B0B0D;
+}

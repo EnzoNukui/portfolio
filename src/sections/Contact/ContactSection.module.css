@@ -1,0 +1,401 @@
+.section {
+  --contact-hover: var(--color-text-primary);
+  --contact-glow: rgb(243 243 241 / 4%);
+  position: relative;
+  z-index: 2;
+  width: calc(100% + (2 * var(--page-gutter)));
+  min-height: 100svh;
+  margin-inline: calc(-1 * var(--page-gutter));
+  padding: 0 var(--page-gutter);
+  color: var(--color-text-primary);
+  background: var(--color-background);
+}
+
+:global([data-theme='light']) .section {
+  --contact-glow: rgb(255 255 255 / 44%);
+}
+
+.surface {
+  position: relative;
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: clamp(28px, 4.2vw, 64px) 0 clamp(30px, 4vw, 58px);
+  background: var(--color-background);
+  isolation: isolate;
+}
+
+.surface::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 46%, var(--contact-glow), transparent 62%);
+  content: '';
+  pointer-events: none;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--color-text-secondary);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  margin-block: auto;
+  padding: clamp(52px, 8vh, 100px) 0 clamp(46px, 7vh, 84px);
+  text-align: center;
+}
+
+.title {
+  width: 100%;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 11.2vw, 11.5rem);
+  font-weight: 700;
+  letter-spacing: -.095em;
+  line-height: .79;
+  text-transform: uppercase;
+}
+
+.titleLink {
+  position: relative;
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+  outline-offset: .12em;
+}
+
+.titleBase,
+.titleReveal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.titleLine {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.titleLetter {
+  display: inline-block;
+  margin-inline-end: -.095em;
+  letter-spacing: normal;
+  transition:
+    transform 620ms cubic-bezier(.4, 0, .2, 1),
+    opacity 480ms ease,
+    filter 620ms ease;
+}
+
+.titleLetter:last-child {
+  margin-inline-end: 0;
+}
+
+.titleReveal {
+  position: absolute;
+  inset: 0;
+  color: var(--contact-hover);
+  pointer-events: none;
+}
+
+.titleReveal .titleLetter {
+  transform: translateY(115%);
+  filter: blur(3px);
+  opacity: 0;
+}
+
+.titleLink:hover .titleBase .titleLetter,
+.titleLink:focus-visible .titleBase .titleLetter {
+  transform: translateY(-115%);
+  filter: blur(3px);
+  opacity: 0;
+  transition-duration: 800ms, 620ms, 800ms;
+  transition-timing-function: cubic-bezier(.65, .05, 0, 1), ease, cubic-bezier(.65, .05, 0, 1);
+  transition-delay: calc(var(--letter-index) * 12ms);
+}
+
+.titleLink:hover .titleReveal .titleLetter,
+.titleLink:focus-visible .titleReveal .titleLetter {
+  transform: translateY(0);
+  filter: blur(0);
+  opacity: 1;
+  transition-duration: 800ms, 620ms, 800ms;
+  transition-timing-function: cubic-bezier(.65, .05, 0, 1), ease, cubic-bezier(.65, .05, 0, 1);
+  transition-delay: calc(var(--letter-index) * 12ms);
+}
+
+.titleLink:focus-visible {
+  border-radius: 3px;
+}
+
+.note {
+  margin: clamp(24px, 4vh, 42px) 0 0;
+  color: var(--color-text-secondary);
+  font-size: clamp(.95rem, 1.3vw, 1.1rem);
+  letter-spacing: .01em;
+}
+
+.actions {
+  display: flex;
+  width: min(100%, 790px);
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: clamp(34px, 5vh, 58px);
+}
+
+.directionalLink {
+  --fill-origin: left;
+  position: relative;
+  display: inline-flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-text-primary) 44%, transparent);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: color 260ms ease, border-color 260ms ease, transform 260ms ease;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.directionalLink:hover,
+.directionalLink:focus-visible {
+  border-color: var(--color-text-primary);
+  color: var(--color-background);
+}
+
+.directionalLink:active {
+  transform: scale(.985);
+}
+
+.directionalLink:focus-visible,
+.backToTop:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
+}
+
+.directionFill {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: var(--color-text-primary);
+  transition: clip-path 460ms cubic-bezier(.65, .05, 0, 1);
+  pointer-events: none;
+}
+
+.fillFromLeft .directionFill { clip-path: inset(0 100% 0 0); }
+.fillFromRight .directionFill { clip-path: inset(0 0 0 100%); }
+.fillFromTop .directionFill { clip-path: inset(0 0 100% 0); }
+.fillFromBottom .directionFill { clip-path: inset(100% 0 0 0); }
+
+.filled .directionFill {
+  clip-path: inset(0 0 0 0);
+}
+
+.directionalContent {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: inherit;
+}
+
+.linkedin {
+  min-width: min(100%, 370px);
+  min-height: 66px;
+  padding: 8px 10px 8px 24px;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-weight: 600;
+}
+
+.linkedinIcon {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  font-size: 1.15rem;
+}
+
+.linkedinLabel {
+  flex: 1;
+  text-align: left;
+}
+
+.arrowBubble {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--color-background);
+  background: var(--color-text-primary);
+  font-size: 1.2rem;
+  transition: color 260ms ease, background 260ms ease, transform 260ms ease;
+}
+
+.linkedin:hover .arrowBubble,
+.linkedin:focus-visible .arrowBubble {
+  color: var(--color-text-primary);
+  background: var(--color-background);
+  transform: rotate(45deg);
+}
+
+.secondaryActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.secondaryLink {
+  min-width: 136px;
+  padding: 0 20px;
+  font-size: .95rem;
+  font-weight: 600;
+}
+
+.smallArrow {
+  width: 15px;
+  height: 15px;
+  margin-left: 3px;
+  transition: transform 220ms ease;
+}
+
+.secondaryLink:hover .smallArrow,
+.secondaryLink:focus-visible .smallArrow {
+  transform: translate(2px, -2px);
+}
+
+.cvLink {
+  min-width: 112px;
+}
+
+.backToTop {
+  position: absolute;
+  right: 0;
+  bottom: clamp(24px, 4vh, 48px);
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--color-text-primary) 38%, transparent);
+  border-radius: 50%;
+  color: var(--color-text-primary);
+  transition: color 220ms ease, background-color 220ms ease, transform 220ms ease;
+}
+
+.backToTop:hover {
+  color: var(--color-background);
+  background: var(--color-text-primary);
+  transform: translateY(-3px);
+}
+
+.backToTop svg {
+  width: 19px;
+  height: 19px;
+}
+
+@media (max-width: 700px) {
+  .surface {
+    min-height: 92svh;
+    padding-block: 26px 78px;
+  }
+
+  .meta {
+    font-size: .63rem;
+    letter-spacing: .1em;
+  }
+
+  .content {
+    padding-block: 54px 42px;
+  }
+
+  .title {
+    font-size: clamp(3.1rem, 14.2vw, 6.7rem);
+    line-height: .84;
+  }
+
+  .titleLetter { transition-duration: 680ms, 520ms, 680ms; }
+
+  .note {
+    max-width: 270px;
+    line-height: 1.5;
+  }
+
+  .actions {
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .linkedin {
+    min-width: min(100%, 350px);
+    min-height: 60px;
+    padding-left: 18px;
+  }
+
+  .arrowBubble {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+
+  .secondaryActions {
+    gap: 9px;
+  }
+
+  .secondaryLink {
+    min-width: 128px;
+    min-height: 48px;
+    padding-inline: 15px;
+    font-size: .88rem;
+  }
+
+  .backToTop {
+    right: 0;
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .title {
+    font-size: 14vw;
+  }
+
+  .secondaryLink {
+    min-width: 116px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .titleReveal,
+  .titleLetter,
+  .titleLink,
+  .directionalLink,
+  .directionFill,
+  .arrowBubble,
+  .smallArrow,
+  .backToTop {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
