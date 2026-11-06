@@ -55,8 +55,16 @@ function DirectionalLink({ href, className, label, download, target, rel, childr
       rel={rel}
       data-cursor-label={label}
       style={{ '--fill-origin': fillDirection } as CSSProperties}
-      onPointerEnter={(event) => { updateDirection(event); setFilled(true) }}
-      onPointerLeave={(event) => { updateDirection(event); setFilled(false) }}
+      onPointerEnter={(event) => {
+        if (event.pointerType !== 'mouse') return
+        updateDirection(event)
+        setFilled(true)
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType !== 'mouse') return
+        updateDirection(event)
+        setFilled(false)
+      }}
       onFocus={() => setFilled(true)}
       onBlur={() => setFilled(false)}
     >

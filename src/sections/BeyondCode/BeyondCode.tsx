@@ -9,15 +9,15 @@ import hackathonOne from '../../assets/eventos/google-hackathon/google-hackathon
 import hackathonTwo from '../../assets/eventos/google-hackathon/google-hackathon-02.jpg'
 import hackathonThree from '../../assets/eventos/google-hackathon/google-hackathon-03.jpg'
 import summitGroup from '../../assets/eventos/talent-summit/talent-summit-grupo.jpeg'
-import summitRobot from '../../assets/eventos/talent-summit/talent-summit-robo.jpeg'
+import summitRobot from '../../assets/eventos/optimized/talent-summit-robo.jpg'
 import summitLembrancinhas from '../../assets/eventos/talent-summit/talent-summit-lembrancinhas.jpeg'
 import summitCracha from '../../assets/eventos/talent-summit/talent-summit-cracha.jpeg'
-import nextIndividual from '../../assets/eventos/next/next-individual.jpeg'
-import nextGroup from '../../assets/eventos/next/next-grupo.jpeg'
-import nextStage from '../../assets/eventos/next/next-palco.png'
-import nextRobot from '../../assets/eventos/next/next-robo.jpeg'
-import nextCar from '../../assets/eventos/next/next-carro.jpeg'
-import nextGuanabara from '../../assets/eventos/next/next-guanabara.jpeg'
+import nextIndividual from '../../assets/eventos/optimized/next-individual.jpg'
+import nextGroup from '../../assets/eventos/optimized/next-grupo.jpg'
+import nextStage from '../../assets/eventos/optimized/next-palco.jpg'
+import nextRobot from '../../assets/eventos/optimized/next-robo.jpg'
+import nextCar from '../../assets/eventos/optimized/next-carro.jpg'
+import nextGuanabara from '../../assets/eventos/optimized/next-guanabara.jpg'
 import styles from './BeyondCode.module.css'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
@@ -274,8 +274,12 @@ export function BeyondCode() {
       const getStackHeight = () => stack.getBoundingClientRect().height || window.innerHeight
       const getPreviewHeight = () => Math.min(220, Math.max(160, getStackHeight() * 0.23))
       const getPanelStride = () => getStackHeight() - getPreviewHeight()
+      const alignPanelStartPositions = () => {
+        const stride = getPanelStride()
+        gsap.set(panels, { y: (index) => index * stride })
+      }
 
-      gsap.set(panels, { y: (index) => index * getPanelStride() })
+      alignPanelStartPositions()
       panels.forEach((panel, index) => {
         panel.toggleAttribute('data-active', index === 0)
         gsap.set(panel, { filter: index === 0 ? 'brightness(1)' : 'brightness(.78)' })
@@ -290,8 +294,8 @@ export function BeyondCode() {
           pinSpacing: true,
           scrub: true,
           anticipatePin: 1,
-          fastScrollEnd: 1800,
           invalidateOnRefresh: true,
+          onRefreshInit: alignPanelStartPositions,
           onUpdate: (self) => {
             const activeIndex = Math.min(panels.length - 1, Math.floor(self.progress * (panels.length - 1) + 0.5))
             panels.forEach((panel, index) => panel.toggleAttribute('data-active', index === activeIndex))
@@ -433,7 +437,14 @@ export function BeyondCode() {
                       onKeyDown={(event) => handlePhotoKeyDown(event, chapter.number, photo.src)}
                       style={{ ...position.style, '--photo-ratio': photo.aspectRatio } as CSSProperties}
                     >
-                      <img src={photo.src} alt={photo.alt} draggable={false} loading={chapter.number === '01' ? 'eager' : 'lazy'} />
+                      <img
+                        src={photo.src}
+                        alt={photo.alt}
+                        draggable={false}
+                        loading="lazy"
+                        decoding="async"
+                        fetchPriority="low"
+                      />
                     </figure>
                   )
                 })}

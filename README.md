@@ -2,12 +2,13 @@
 
 Portfólio pessoal de **Enzo Nukui**, estudante de Análise e Desenvolvimento de Sistemas na FIAP. Uma experiência visual e interativa para apresentar sua trajetória, tecnologias, projetos, eventos e próximos passos em desenvolvimento de software.
 
-**Repositório:** [EnzoNukui/portfolio](https://github.com/EnzoNukui/portfolio)  
-**Domínio:** [enzonukui.com.br](https://enzonukui.com.br) — registrado; publicação na Vercel pendente.
+**Site:** [enzonukui.com.br](https://enzonukui.com.br)
+
+**Repositório:** [EnzoNukui/portfolio](https://github.com/EnzoNukui/portfolio) · **Hospedagem:** Vercel
 
 ## Sobre o projeto
 
-O site foi pensado como uma narrativa contínua, com dois temas visuais, animações guiadas pela rolagem e layouts adaptados para celular, tablet e desktop. As interações mantêm alternativas por toque e teclado e respeitam a preferência do sistema por movimento reduzido.
+O site apresenta minha trajetória em uma narrativa visual contínua. A experiência combina dois temas, animações ligadas à rolagem, interação por mouse, toque e teclado e layouts para celular, tablet e desktop. As animações respeitam a preferência do sistema por movimento reduzido.
 
 ### Seções
 
@@ -63,17 +64,17 @@ npx playwright install chromium
 
 ## Publicação na Vercel
 
-O projeto está preparado para ser importado da raiz do repositório:
+O site está publicado na Vercel e conectado ao domínio [enzonukui.com.br](https://enzonukui.com.br). O projeto usa as configurações abaixo caso seja necessário recriar ou revisar a implantação:
 
 | Configuração | Valor |
 | --- | --- |
 | Framework Preset | Vite |
-| Root Directory | `/` |
+| Root Directory | `/` (raiz do repositório) |
 | Install Command | `npm ci` |
 | Build Command | `npm run build` |
 | Output Directory | `dist` |
 
-Depois do primeiro deploy, adicione `enzonukui.com.br` em **Project Settings → Domains**. Configure no Registro.br os registros DNS exatos informados pela Vercel e aguarde a validação do domínio e do certificado HTTPS. A branch de produção conectada ao GitHub será publicada automaticamente a cada atualização.
+O domínio foi configurado no Registro.br e validado pela Vercel. Com a integração do GitHub ativa, novos commits na branch de produção geram uma nova implantação automaticamente. Para conferir o estado do domínio, use **Project Settings → Domains** no painel da Vercel.
 
 O projeto não precisa de variáveis de ambiente para o build atual. O currículo fica em `public/cv/enzo-nukui-cv.pdf`; o player de música usa a playlist definida em `src/data/music.ts`.
 
@@ -82,6 +83,7 @@ O projeto não precisa de variáveis de ambiente para o build atual. O currícul
 ```text
 public/                 Arquivos servidos diretamente, como currículo e favicon
 src/assets/             Retrato, imagens pessoais, eventos e capturas dos projetos
+src/assets/eventos/optimized/  Fotografias de eventos redimensionadas e comprimidas para a web
 src/components/         Menu, controle de tema, currículo e cursor contextual
 src/data/               Conteúdo da navegação, tecnologias, projetos e playlist
 src/hooks/              Hooks de seção ativa, mídia, cursor e movimento reduzido

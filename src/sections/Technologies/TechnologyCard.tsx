@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties, type FocusEvent, type PointerEvent as ReactPointerEvent } from 'react'
+import { useEffect, useRef, useState, type CSSProperties, type FocusEvent, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent } from 'react'
 import { stackProjects, type Technology } from '../../data/technologies'
 import styles from './TechnologyCard.module.css'
 
@@ -64,6 +64,13 @@ export function TechnologyCard({ technology }: TechnologyCardProps) {
     if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setFocused(false)
   }
 
+  const revealWithTouch = (event: ReactMouseEvent<HTMLElement>) => {
+    if (!window.matchMedia('(hover: none)').matches) return
+    const target = event.target
+    if (target instanceof Element && target.closest('a, button')) return
+    setTouchRevealed((current) => !current)
+  }
+
   return (
     <article
       ref={cardRef}
@@ -72,9 +79,9 @@ export function TechnologyCard({ technology }: TechnologyCardProps) {
       data-revealed={revealed}
       style={{ '--technology-color': technology.color } as CSSProperties}
       onPointerEnter={revealWithPointer}
-      onPointerDown={(event) => { if (event.pointerType === 'touch') setTouchRevealed(true) }}
+      onClick={revealWithTouch}
       onPointerLeave={(event) => { if (event.pointerType === 'mouse') setHovered(false) }}
-      onFocusCapture={() => setFocused(true)}
+      onFocusCapture={(event) => setFocused(event.target instanceof HTMLElement && event.target.matches(':focus-visible'))}
       onBlurCapture={clearWhenFocusLeaves}
       aria-label={`${technology.name}${project ? `, projeto ${project.name}` : ''}`}
     >
@@ -124,7 +131,7 @@ export function TechnologyCard({ technology }: TechnologyCardProps) {
         className={styles.revealControl}
         aria-label={`${revealed ? 'Ocultar' : 'Revelar'} captura do projeto associado a ${technology.name}`}
         aria-pressed={revealed}
-        onClick={() => setTouchRevealed(true)}
+        onClick={() => setTouchRevealed((current) => !current)}
       >
         <span className={styles.srOnly}>{revealed ? 'Ocultar captura' : 'Revelar captura'}</span>
       </button>

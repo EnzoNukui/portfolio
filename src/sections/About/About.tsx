@@ -22,8 +22,8 @@ import ifspVeterans from '../../assets/sobre-mim/03-ifsp/imagem_ifsp_veteranos.j
 import firstProjectTeam from '../../assets/eventos/primeiro-trabalho/primeiro-trabalho-01.jpg'
 import googleHackathonTeam from '../../assets/eventos/google-hackathon/google-hackathon-01.jpg'
 import talentSummitGroup from '../../assets/eventos/talent-summit/talent-summit-grupo.jpeg'
-import talentSummitRobot from '../../assets/eventos/talent-summit/talent-summit-robo.jpeg'
-import fiapNextIndividual from '../../assets/eventos/next/next-individual.jpeg'
+import talentSummitRobot from '../../assets/eventos/optimized/talent-summit-robo.jpg'
+import fiapNextIndividual from '../../assets/eventos/optimized/next-individual.jpg'
 import styles from './About.module.css'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)

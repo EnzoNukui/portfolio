@@ -14,8 +14,7 @@
   transition: box-shadow .28s ease;
 }
 
-.card[data-revealed='true'],
-.card:focus-within {
+.card[data-revealed='true'] {
   box-shadow: 0 0 12px rgb(255 255 255 / 2%);
 }
 
@@ -58,8 +57,7 @@
   pointer-events: none;
 }
 
-.card[data-revealed='true'] .revealLayer,
-.card:focus-within .revealLayer {
+.card[data-revealed='true'] .revealLayer {
   clip-path: ellipse(100% 120% at 50% 0%);
 }
 
@@ -75,8 +73,7 @@
   transition: transform .75s var(--reveal-ease);
 }
 
-.card[data-revealed='true'] .projectImage,
-.card:focus-within .projectImage { transform: scale(1); }
+.card[data-revealed='true'] .projectImage { transform: scale(1); }
 
 .imageShade {
   position: absolute;
@@ -86,8 +83,7 @@
   transition: opacity .25s ease;
 }
 
-.card[data-revealed='true'] .imageShade,
-.card:focus-within .imageShade { opacity: 1; }
+.card[data-revealed='true'] .imageShade { opacity: 1; }
 
 .baseContent {
   position: absolute;
@@ -98,8 +94,7 @@
   pointer-events: none;
 }
 
-.card[data-revealed='true'] .baseContent,
-.card:focus-within .baseContent { opacity: 0; }
+.card[data-revealed='true'] .baseContent { opacity: 0; }
 
 .logo {
   width: clamp(68px, 6vw, 88px);
@@ -173,8 +168,7 @@
   pointer-events: none;
 }
 
-.card[data-revealed='true'] .projectDetails,
-.card:focus-within .projectDetails {
+.card[data-revealed='true'] .projectDetails {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
@@ -274,10 +268,8 @@
 
 [data-theme='light'] .cardFrame path { stroke: #aeb5ba; }
 [data-theme='light'] .technologyName { text-shadow: none; }
-[data-theme='light'] .card[data-revealed='true'] .technologyName,
-[data-theme='light'] .card:focus-within .technologyName { color: #eff0f1; text-shadow: 0 1px 8px rgb(0 0 0 / 68%); }
-[data-theme='light'] .card[data-revealed='true'],
-[data-theme='light'] .card:focus-within { --technology-date-color: #f0f0ee; }
+[data-theme='light'] .card[data-revealed='true'] .technologyName { color: #eff0f1; text-shadow: 0 1px 8px rgb(0 0 0 / 68%); }
+[data-theme='light'] .card[data-revealed='true'] { --technology-date-color: #f0f0ee; }
 
 @media (max-width: 900px) {
   .logo { width: clamp(58px, 8vw, 78px); height: clamp(58px, 8vw, 78px); }

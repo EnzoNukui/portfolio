@@ -117,7 +117,6 @@
   opacity: 0;
 }
 
-.titleLink:hover .titleBase .titleLetter,
 .titleLink:focus-visible .titleBase .titleLetter {
   transform: translateY(-115%);
   filter: blur(3px);
@@ -127,7 +126,6 @@
   transition-delay: calc(var(--letter-index) * 12ms);
 }
 
-.titleLink:hover .titleReveal .titleLetter,
 .titleLink:focus-visible .titleReveal .titleLetter {
   transform: translateY(0);
   filter: blur(0);
@@ -175,7 +173,6 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.directionalLink:hover,
 .directionalLink:focus-visible {
   border-color: var(--color-text-primary);
   color: var(--color-background);
@@ -221,7 +218,7 @@
 .linkedin {
   min-width: min(100%, 370px);
   min-height: 66px;
-  padding: 8px 10px 8px 24px;
+  padding: 8px 4px 8px 24px;
   font-size: clamp(1rem, 1.5vw, 1.15rem);
   font-weight: 600;
 }
@@ -252,7 +249,6 @@
   transition: color 260ms ease, background 260ms ease, transform 260ms ease;
 }
 
-.linkedin:hover .arrowBubble,
 .linkedin:focus-visible .arrowBubble {
   color: var(--color-text-primary);
   background: var(--color-background);
@@ -280,7 +276,6 @@
   transition: transform 220ms ease;
 }
 
-.secondaryLink:hover .smallArrow,
 .secondaryLink:focus-visible .smallArrow {
   transform: translate(2px, -2px);
 }
@@ -303,7 +298,7 @@
   transition: color 220ms ease, background-color 220ms ease, transform 220ms ease;
 }
 
-.backToTop:hover {
+.backToTop:focus-visible {
   color: var(--color-background);
   background: var(--color-text-primary);
   transform: translateY(-3px);
@@ -316,8 +311,9 @@
 
 @media (max-width: 700px) {
   .surface {
-    min-height: 92svh;
-    padding-block: 26px 78px;
+    min-height: max(100svh, 36rem);
+    padding-top: max(22px, env(safe-area-inset-top));
+    padding-bottom: max(76px, calc(28px + env(safe-area-inset-bottom)));
   }
 
   .meta {
@@ -326,12 +322,13 @@
   }
 
   .content {
-    padding-block: 54px 42px;
+    padding: clamp(44px, 8vh, 68px) 0 30px;
   }
 
   .title {
-    font-size: clamp(3.1rem, 14.2vw, 6.7rem);
-    line-height: .84;
+    font-size: clamp(2.4rem, 12.4vw, 5.1rem);
+    line-height: .9;
+    letter-spacing: -.085em;
   }
 
   .titleLetter { transition-duration: 680ms, 520ms, 680ms; }
@@ -342,12 +339,14 @@
   }
 
   .actions {
+    width: 100%;
     gap: 12px;
-    margin-top: 30px;
+    margin-top: clamp(24px, 5vh, 36px);
   }
 
   .linkedin {
-    min-width: min(100%, 350px);
+    width: min(100%, 370px);
+    min-width: 0;
     min-height: 60px;
     padding-left: 18px;
   }
@@ -359,11 +358,12 @@
   }
 
   .secondaryActions {
+    width: 100%;
     gap: 9px;
   }
 
   .secondaryLink {
-    min-width: 128px;
+    min-width: min(128px, calc((100vw - 2 * var(--page-gutter) - 9px) / 2));
     min-height: 48px;
     padding-inline: 15px;
     font-size: .88rem;
@@ -371,17 +371,64 @@
 
   .backToTop {
     right: 0;
-    bottom: 20px;
+    bottom: max(20px, env(safe-area-inset-bottom));
   }
 }
 
 @media (max-width: 380px) {
   .title {
-    font-size: 14vw;
+    font-size: clamp(2.2rem, 11.8vw, 2.8rem);
   }
 
   .secondaryLink {
-    min-width: 116px;
+    min-width: 0;
+    flex: 1 1 0;
+    padding-inline: 11px;
+  }
+}
+
+@media (max-height: 620px) and (max-width: 700px) {
+  .surface { min-height: 620px; }
+  .content { padding-block: 34px 20px; }
+  .actions { margin-top: 22px; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .titleLink:hover .titleBase .titleLetter {
+    transform: translateY(-115%);
+    filter: blur(3px);
+    opacity: 0;
+    transition-duration: 800ms, 620ms, 800ms;
+    transition-timing-function: cubic-bezier(.65, .05, 0, 1), ease, cubic-bezier(.65, .05, 0, 1);
+    transition-delay: calc(var(--letter-index) * 12ms);
+  }
+
+  .titleLink:hover .titleReveal .titleLetter {
+    transform: translateY(0);
+    filter: blur(0);
+    opacity: 1;
+    transition-duration: 800ms, 620ms, 800ms;
+    transition-timing-function: cubic-bezier(.65, .05, 0, 1), ease, cubic-bezier(.65, .05, 0, 1);
+    transition-delay: calc(var(--letter-index) * 12ms);
+  }
+
+  .directionalLink:hover {
+    border-color: var(--color-text-primary);
+    color: var(--color-background);
+  }
+
+  .linkedin:hover .arrowBubble {
+    color: var(--color-text-primary);
+    background: var(--color-background);
+    transform: rotate(45deg);
+  }
+
+  .secondaryLink:hover .smallArrow { transform: translate(2px, -2px); }
+
+  .backToTop:hover {
+    color: var(--color-background);
+    background: var(--color-text-primary);
+    transform: translateY(-3px);
   }
 }
 
